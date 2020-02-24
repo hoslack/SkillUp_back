@@ -1,0 +1,96 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "clean": "rm -rf dist && mkdir dist",
+    "build": "babel . --ignore node_modules,test,coverage,dist -d dist/ ",
+    "serve": "node dist/src/index.js",
+    "start": "NODE_ENV=production yarn run build && yarn run serve",
+    "start:dev": "NODE_ENV=development  DEBUG=log  nodemon --exec babel-node src/index.js",
+    "lint": "node_modules/.bin/eslint ./src",
+    "pretest": "NODE_ENV=test yarn db:migrate",
+    "test": "jest --no-cache  --detectOpenHandles --runInBand --forceExit",
+    "db:seed": "node_modules/.bin/sequelize db:seed:all $* --seeders-path src/database/seeders/default",
+    "db:seed:unittest": "node_modules/.bin/sequelize db:seed:all $* --seeders-path src/database/seeders/unittesting",
+    "db:seed:e2e": "node_modules/.bin/sequelize db:seed:all $* --seeders-path src/database/seeders/e2e",
+    "db:migrate": "node_modules/.bin/sequelize db:migrate",
+    "db:rollback": "node_modules/.bin/sequelize db:migrate:undo:all",
+    "db:rollmigrate": "yarn db:rollback && yarn db:migrate && yarn db:seed"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^6.3.1",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.6",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "bcrypt": "^3.0.3",
+    "body-parser": "^1.18.3",
+    "build-server": "^0.0.2",
+    "cls-hooked": "^4.2.2",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "debug": "~2.6.9",
+    "dotenv": "^6.0.0",
+    "express": "~4.16.0",
+    "express-validator": "^5.3.1",
+    "http-errors": "~1.6.2",
+    "inline-css": "^2.4.1",
+    "jsonwebtoken": "^8.4.0",
+    "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.11",
+    "moment": "^2.22.2",
+    "morgan": "~1.9.0",
+    "mysql2": "^1.6.5",
+    "pg": "^7.8.1",
+    "randomstring": "^1.1.5",
+    "sequelize": "^4.42.0",
+    "sequelize-cli": "^4.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "nodemon": "^1.18.8"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/?(*.)(spec|test)js",
+      "<rootDir>/src/**/?(*.)(spec|test).js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/database/migrations",
+      "<rootDir>/src/database/seeders",
+      "<rootDir>/src/database/models/index.js",
+      "<rootDir>/src/middlewares/index.js",
+      "<rootDir>/src/modules/requests/__tests__/mocks",
+      "<rootDir>/src/modules/travelChecklist/CloudinaryDeletion.js"
+    ],
+    "testEnvironment": "node"
+  },
+  "commitplease": {
+    "style": "angular",
+    "types": [
+      "feat",
+      "fix",
+      "docs",
+      "style",
+      "refactor",
+      "perf",
+      "test",
+      "chore"
+    ],
+    "scope": "\\S+.*"
+  },
+  "engines": {
+    "yarn": "^1.12.x"
+  }
+}
