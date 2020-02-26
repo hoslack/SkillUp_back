@@ -21,6 +21,13 @@ module.exports = {
       description: 'Can perform all tasks',
       createdAt: '2019-02-03',
       updatedAt: '2019-02-03',
+    },
+    {
+      name: 'Employer',
+      id: 76100,
+      description: 'Creates job adverts',
+      createdAt: '2019-02-03',
+      updatedAt: '2019-02-03',
     }
   ]),
 

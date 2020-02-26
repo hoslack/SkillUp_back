@@ -33,8 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       account: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 0
+        allowNull: false
       },
       resume: {
         type: DataTypes.TEXT,
@@ -64,27 +63,32 @@ module.exports = (sequelize, DataTypes) => {
   );
   User.associate = (models) => {
     User.belongsTo(models.Role, {
-      foreignKey: { name: 'role' },
+      foreignKey: 'roleId',
+      as: 'role'
     });
   };
   User.associate = (models) => {
     User.hasMany(models.Review, {
-      foreignKey: { name: 'reviews' }
+      foreignKey: 'userId',
+      as: 'reviews'
     });
   };
   User.associate = (models) => {
     User.hasOne(models.Resume, {
-      foreignKey: { name: 'resume' }
+      foreignKey: 'userId',
+      as: 'resume'
     });
   };
   User.associate = (models) => {
     User.hasMany(models.Payment, {
-      foreignKey: { name: 'payments' }
+      foreignKey: 'userId',
+      as: 'payments'
     });
   };
   User.associate = (models) => {
     User.hasMany(models.Transaction, {
-      foreignKey: { name: 'transactions' }
+      foreignKey: 'userId',
+      as: 'transactions'
     });
   };
   return User;
