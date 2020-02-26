@@ -1,7 +1,6 @@
 
-
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('Comments', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('Resumes', {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -9,13 +8,13 @@ module.exports = {
       type: Sequelize.INTEGER
     },
     body: {
-      type: Sequelize.STRING
+      type: Sequelize.TEXT
     },
-    reviewId: {
+    userId: {
       allowNull: false,
       type: Sequelize.INTEGER,
       references: {
-        model: 'Reviews',
+        model: 'Users',
         onDelete: 'CASCADE',
         key: 'id'
       }
@@ -29,5 +28,5 @@ module.exports = {
       type: Sequelize.DATE
     }
   }),
-  down: (queryInterface, Sequelize) => queryInterface.dropTable('Comments')
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('Resumes')
 };
