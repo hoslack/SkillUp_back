@@ -1,27 +1,24 @@
+
 module.exports = (sequelize, DataTypes) => {
-  const Review = sequelize.define(
-    'Review', {
-      description: {
-        type: DataTypes.TEXT,
-        allowNull: false
-      }
-    }, {
-      paranoid: true
-    }
-  );
+  const Review = sequelize.define('Review', {
+    description: DataTypes.TEXT
+  }, { paranoid: true });
   Review.associate = (models) => {
     Review.belongsTo(models.User, {
-      foreignKey: { name: 'user' }
+      foreignKey: 'userId',
+      as: 'user'
     });
   };
   Review.associate = (models) => {
     Review.belongsTo(models.Resume, {
-      foreignKey: { name: 'resume' }
+      foreignKey: 'resumeId',
+      as: 'resume'
     });
   };
   Review.associate = (models) => {
     Review.hasMany(models.Comment, {
-      foreignKey: { name: 'comments' }
+      foreignKey: 'reviewId',
+      as: 'comments'
     });
   };
   return Review;

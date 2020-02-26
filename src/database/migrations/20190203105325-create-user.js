@@ -33,6 +33,18 @@ module.exports = {
       type: Sequelize.STRING,
       allowNull: true
     },
+    profession: {
+      type: Sequelize.STRING,
+      allowNull: true
+    },
+    account: {
+      type: Sequelize.INTEGER,
+      allowNull: false
+    },
+    resume: {
+      type: Sequelize.TEXT,
+      allowNull: true
+    },
     picture: {
       type: Sequelize.STRING,
       allowNull: true
